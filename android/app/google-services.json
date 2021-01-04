@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "479462991148",
+    "project_id": "final-odevi",
+    "storage_bucket": "final-odevi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:479462991148:android:7b93b65f63a53a0b2c7889",
+        "android_client_info": {
+          "package_name": "flutterplugins.tutorialspoint.flutter_final_odevi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "479462991148-nqjaaoc5b6bejj6k7ccsursq7bmbhac1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKdY4KaLR5aH18tEOFJY9sg6l49dx9HjQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "479462991148-nqjaaoc5b6bejj6k7ccsursq7bmbhac1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
