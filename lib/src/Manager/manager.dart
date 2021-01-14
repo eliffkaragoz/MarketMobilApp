@@ -1,9 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 //import 'package:flutter_final_odevi/src/Manager/products.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import 'ManagerHome.dart';
 
@@ -15,6 +15,12 @@ class ManagerPage extends StatefulWidget {
 class _ManagerPageState extends State<ManagerPage> {
   String _email, _password;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _register();
+  }
 
   Widget _title() {
     return RichText(
@@ -172,5 +178,15 @@ class _ManagerPageState extends State<ManagerPage> {
             ],
           ),
         ));
+  }
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  void _register() async {
+    final FirebaseUser user = (await _auth.createUserWithEmailAndPassword(
+      email: "a@gmail.com",
+      password: "123456",
+    ))
+        .user;
   }
 }

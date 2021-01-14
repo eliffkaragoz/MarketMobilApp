@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+//import 'package:flutter/material.dart';
 import 'package:flutter_final_odevi/BackGround/BackGroundMain.dart';
 import 'package:flutter_final_odevi/src/Manager/ManagerHome/CourierManagement.dart';
 import 'package:flutter_final_odevi/src/Manager/ManagerHome/courierTracking.dart';
-import 'file:///D:/flutter_calismalar/flutter_final_odevi/lib/src/Courier/courier.dart';
+//import '../Courier/courier.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;

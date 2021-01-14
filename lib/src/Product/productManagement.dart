@@ -1,27 +1,24 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_final_odevi/BackGround/BackGroundMain.dart';
-import 'package:flutter_final_odevi/src/Manager/ManagerHome/CourierManagement.dart';
-import 'package:flutter_final_odevi/src/Manager/ManagerHome/courierTracking.dart';
-import 'package:flutter_final_odevi/src/Product/productManagement.dart';
-//import '../Courier/courier.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-final FirebaseAuth _auth = FirebaseAuth.instance;
+import 'ProductEdit.dart';
+import 'productAdd.dart';
+import 'productDelete.dart';
 
-class ManagerHome extends StatefulWidget {
-  ManagerHome({Key key, this.title}) : super(key: key);
+class ProductManagement extends StatefulWidget {
+  ProductManagement({Key key, this.title}) : super(key: key);
   final String title;
   @override
-  _ManagerHomeState createState() => _ManagerHomeState();
+  _ProductManagementState createState() => _ProductManagementState();
 }
 
-class _ManagerHomeState extends State<ManagerHome> {
+class _ProductManagementState extends State<ProductManagement> {
   Widget _title() {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-        text: 'ADMIN PAGE ',
+        text: 'PRODUCTS ',
         style: GoogleFonts.portLligatSans(
           textStyle: Theme.of(context).textTheme.display1,
           fontSize: 40,
@@ -32,34 +29,11 @@ class _ManagerHomeState extends State<ManagerHome> {
     );
   }
 
-  Widget productManagementButton() {
+  Widget ProductAddButton() {
     return InkWell(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => ProductManagement()));
-      },
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(vertical: 13),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: Colors.white12,
-          borderRadius: BorderRadius.all(Radius.circular(100)),
-          border: Border.all(color: Colors.orange, width: 5),
-        ),
-        child: Text(
-          'PRODUCT MANAGEMENT',
-          style: TextStyle(fontSize: 20, color: Colors.brown),
-        ),
-      ),
-    );
-  }
-
-  Widget courierManagementButton() {
-    return InkWell(
-      onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => CourierManagement()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ProductAdd()));
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -71,18 +45,18 @@ class _ManagerHomeState extends State<ManagerHome> {
           border: Border.all(color: Colors.orange, width: 5),
         ),
         child: Text(
-          'COURİER MANAGEMENT',
+          'PRODUCT ADD',
           style: TextStyle(fontSize: 20, color: Colors.brown),
         ),
       ),
     );
   }
 
-  Widget orderListButton() {
+  Widget ProductDeleteButton() {
     return InkWell(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => orderListButton()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ProductDelete()));
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -94,18 +68,18 @@ class _ManagerHomeState extends State<ManagerHome> {
           border: Border.all(color: Colors.orange, width: 5),
         ),
         child: Text(
-          'ORDER LIST',
+          'PRODUCT DELETE',
           style: TextStyle(fontSize: 20, color: Colors.brown),
         ),
       ),
     );
   }
 
-  Widget orderManagementButton() {
+  Widget ProductEditButton() {
     return InkWell(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => orderManagementButton()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ProductEdit()));
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -117,37 +91,13 @@ class _ManagerHomeState extends State<ManagerHome> {
           border: Border.all(color: Colors.orange, width: 5),
         ),
         child: Text(
-          'ORDER MANAGEMENT',
+          'PRODUCT EDIT',
           style: TextStyle(fontSize: 20, color: Colors.brown),
         ),
       ),
     );
   }
 
-  Widget CourierTrackingButton() {
-    return InkWell(
-      onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => courierTracking()));
-      },
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(vertical: 13),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: Colors.white12,
-          borderRadius: BorderRadius.all(Radius.circular(30)),
-          border: Border.all(color: Colors.orange, width: 5),
-        ),
-        child: Text(
-          'WHERE IS THE COURIER?',
-          style: TextStyle(fontSize: 20, color: Colors.brown),
-        ),
-      ),
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -166,16 +116,11 @@ class _ManagerHomeState extends State<ManagerHome> {
                     SizedBox(height: 160),
                     _title(),
                     SizedBox(height: 45),
-                    productManagementButton(),
+                    ProductAddButton(),
                     SizedBox(height: 20),
-                    courierManagementButton(),
+                    ProductDeleteButton(),
                     SizedBox(height: 20),
-                    orderListButton(),
-                    SizedBox(height: 20),
-                    orderManagementButton(),
-                    SizedBox(height: 20),
-                    CourierTrackingButton(),
-                    SizedBox(height: 20),
+                    ProductEditButton(),
                   ],
                 ),
               ),

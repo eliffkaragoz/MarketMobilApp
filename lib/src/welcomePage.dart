@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_final_odevi/src/User/UserPage.dart';
-import 'package:flutter_final_odevi/src/User/UserRegister.dart';
-
 import 'package:google_fonts/google_fonts.dart';
+
 import 'Courier/courier.dart';
-import 'file:///D:/flutter_calismalar/flutter_final_odevi/lib/src/Manager/manager.dart';
+import 'Manager/manager.dart';
 
 class WelcomePage extends StatefulWidget {
   WelcomePage({Key key, this.title}) : super(key: key);
