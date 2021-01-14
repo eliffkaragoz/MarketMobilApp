@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_final_odevi/BackGround/BackGroundMain.dart';
-import 'package:flutter_final_odevi/src/Manager/ManagerHome/CourierManagement.dart';
+import 'file:///D:/flutter_calismalar/flutter_final_odevi/lib/src/Manager/ManagerHome/CourierManagement/CourierCRUDPage.dart';
+import 'package:flutter_final_odevi/src/Manager/ManagerHome/ProductManagement/ProductCRUDPage.dart';
 import 'package:flutter_final_odevi/src/Manager/ManagerHome/courierTracking.dart';
 import 'package:flutter_final_odevi/src/Product/productManagement.dart';
 //import '../Courier/courier.dart';
@@ -35,8 +36,8 @@ class _ManagerHomeState extends State<ManagerHome> {
   Widget productManagementButton() {
     return InkWell(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => ProductManagement()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ProductManager()));
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
