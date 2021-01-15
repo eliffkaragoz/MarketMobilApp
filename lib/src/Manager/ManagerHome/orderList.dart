@@ -51,7 +51,7 @@ class _OrderListPageState extends State<OrderListPage> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 FlatButton(
-                  onPressed: () => giveCourier(),
+                  onPressed: () => giveCourier(doc.reference),
                   child: Text('Give Courier ',
                       style: TextStyle(color: Colors.white)),
                   color: Colors.orangeAccent,
@@ -94,8 +94,8 @@ class _OrderListPageState extends State<OrderListPage> {
     );
   }
 
-  void giveCourier() {
+  void giveCourier(DocumentReference ordr) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => courierList()));
+        context, MaterialPageRoute(builder: (context) => courierList(ordr)));
   }
 }

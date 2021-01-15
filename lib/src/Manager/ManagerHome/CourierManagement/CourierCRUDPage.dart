@@ -25,7 +25,6 @@ class _CourierCRUDState extends State<CourierCRUD> {
   final db = Firestore.instance;
   final _formKey = GlobalKey<FormState>();
   String name;
-  //String price;
 
   Card buildItem(DocumentSnapshot doc) {
     return Card(
@@ -35,12 +34,19 @@ class _CourierCRUDState extends State<CourierCRUD> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            SizedBox(height: 6),
             Text(
               'COURIER ID :  ${doc['id']} ',
               style: TextStyle(color: Colors.brown, fontSize: 24),
             ),
+            SizedBox(height: 6),
             Text(
               'COURIER NAME:  ${doc['name']}',
+              style: TextStyle(color: Colors.brown, fontSize: 24),
+            ),
+            SizedBox(height: 6),
+            Text(
+              'ORDER NAME:  ${doc['ordr_name']}',
               style: TextStyle(color: Colors.brown, fontSize: 24),
             ),
             SizedBox(height: 12),
@@ -157,9 +163,12 @@ class _CourierCRUDState extends State<CourierCRUD> {
   void createData() async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      DocumentReference ref = await db
-          .collection('CourierCRUD')
-          .add({'name': '$name ', 'id': '$id'});
+      DocumentReference ref = await db.collection('CourierCRUD').add({
+        'name': '$name ',
+        'id': '$id',
+        'order': null,
+        'ordr_name': 'no order'
+      });
       setState(() => id = ref.documentID);
       print(ref.documentID);
     }

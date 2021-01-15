@@ -1,18 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Courier {
+class Order {
   String id;
   String name;
-  String ordr_name;
-  DocumentReference order;
+  String price;
   final DocumentReference reference;
 
-  Courier.fromMap(Map<String, dynamic> map, {this.reference})
+  Order.fromMap(Map<String, dynamic> map, {this.reference})
       : //assert(map['name'] != null),
         //assert(map['votes'] != null),
-        id = map['id'],
-        name = map['name'];
+        name = map['name'],
+        price = map['price'];
 
-  Courier.fromSnapshot(DocumentSnapshot snapshot)
+  Order.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data(), reference: snapshot.reference);
 }

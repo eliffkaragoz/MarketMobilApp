@@ -1,15 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_final_odevi/src/Courier/Courier.dart';
+import 'package:flutter_final_odevi/src/Manager/ManagerHome/orderList.dart';
 
 class courierList extends StatefulWidget {
-  courierList({Key key, this.title}) : super(key: key);
-  final String title;
+  courierList(DocumentReference ordr) {
+    this.ordr = ordr;
+  }
+  DocumentReference ordr;
   @override
-  _courierListState createState() => _courierListState();
+  _courierListState createState() => _courierListState(ordr);
 }
 
 class _courierListState extends State<courierList> {
+  _courierListState(DocumentReference ordr) {
+    this.ordr = ordr;
+  }
+  DocumentReference ordr;
+  String pname;
+
   Widget _buildBody(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance.collection('CourierCRUD').snapshots(),
@@ -29,10 +38,21 @@ class _courierListState extends State<courierList> {
     );
   }
 
-  void giveCourier() {} //TODO
-
   Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
     final record = Courier.fromSnapshot(data);
+
+    Future<void> giveCourier() async {
+      record.order = ordr;
+      ordr.get().then((DocumentSnapshot ds) {
+        if (ds.exists) {
+          pname = ds.data()['name'];
+          record.reference
+              .update(<String, dynamic>{'order': ordr, 'ordr_name': pname});
+        }
+      });
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => orderList()));
+    }
 
     Widget product;
 
