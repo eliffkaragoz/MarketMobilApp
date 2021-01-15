@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_final_odevi/src/User/UserPage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'Courier/courier.dart';
 import 'Manager/manager.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -90,8 +89,8 @@ class _WelcomePageState extends State<WelcomePage> {
   Widget _CourierButton() {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => courierPage()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => _CourierButton())); //TODO
       },
       child: Container(
         width: MediaQuery.of(context).size.width,

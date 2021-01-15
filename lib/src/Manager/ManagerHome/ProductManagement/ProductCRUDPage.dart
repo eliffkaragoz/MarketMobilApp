@@ -1,6 +1,6 @@
-import 'dart:math';
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_final_odevi/src/Product/ProductEditPage.dart';
 
 class ProductManager extends StatelessWidget {
   // This widget is the root of your application.
@@ -83,6 +83,7 @@ class _ProductCRUDPageState extends State<ProductCRUDPage> {
       },
       onSaved: (value) => name = value,
     );
+    // ignore: missing_return
   }
 
   TextFormField buildTextFormField2() {
@@ -167,8 +168,9 @@ class _ProductCRUDPageState extends State<ProductCRUDPage> {
     }
   }
 
-  void updateData(DocumentSnapshot doc) async {
-    await db.collection('ProductCRUD').document(doc.documentID).updateData({});
+  void updateData(DocumentSnapshot doc) {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => ProductEditPage(doc.id)));
   }
 
   void deleteData(DocumentSnapshot doc) async {

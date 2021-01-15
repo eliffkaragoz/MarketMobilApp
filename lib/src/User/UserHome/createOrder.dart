@@ -40,7 +40,7 @@ class _createOrderState extends State<createOrder>
         controller: _tabController,
         children: <Widget>[
           ProductListForOrder(),
-          OrderList(),
+          orderList(),
         ],
       ),
     );

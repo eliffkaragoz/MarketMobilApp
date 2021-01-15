@@ -1,18 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_final_odevi/src/Product/ProductEditPage.dart';
+import 'package:flutter_final_odevi/src/Courier/Courier.dart';
 
-import 'Product.dart';
-
-class ProductEdit extends StatefulWidget {
+class courierList extends StatefulWidget {
+  courierList({Key key, this.title}) : super(key: key);
+  final String title;
   @override
-  _ProductEditState createState() => _ProductEditState();
+  _courierListState createState() => _courierListState();
 }
 
-class _ProductEditState extends State<ProductEdit> {
+class _courierListState extends State<courierList> {
   Widget _buildBody(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('ProductCRUD').snapshots(),
+      stream: FirebaseFirestore.instance.collection('CourierCRUD').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return LinearProgressIndicator();
 
@@ -29,21 +29,18 @@ class _ProductEditState extends State<ProductEdit> {
     );
   }
 
-  void Edit() {}
+  void giveCourier() {} //TODO
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
-    final record = Product.fromSnapshot(data);
+    final record = Courier.fromSnapshot(data);
 
     Widget product;
 
     Widget productButton() {
       return ListTile(
           title: Text(record.name),
-          trailing: Text(record.price),
-          onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ProductEditPage(record.reference.id))));
+          trailing: Text(record.id),
+          onTap: () => giveCourier());
     }
 
     product = productButton();
@@ -63,7 +60,12 @@ class _ProductEditState extends State<ProductEdit> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Ürün Düzenleme')),
+      appBar: AppBar(
+        title: Text(
+          'COURIER LIST',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
       body: _buildBody(context),
     );
   }
