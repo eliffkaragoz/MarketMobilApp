@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_final_odevi/src/Manager/ManagerHome/orderList.dart';
 import 'package:flutter_final_odevi/src/User/UserHome/CreateOrder/ProductListForOrder.dart';
 
+import 'CreateOrder/OrderList.dart';
+
 class createOrder extends StatefulWidget {
   createOrder({Key key}) : super(key: key);
   @override
@@ -40,7 +42,7 @@ class _createOrderState extends State<createOrder>
         controller: _tabController,
         children: <Widget>[
           ProductListForOrder(),
-          orderList(),
+          OrderList(),
         ],
       ),
     );

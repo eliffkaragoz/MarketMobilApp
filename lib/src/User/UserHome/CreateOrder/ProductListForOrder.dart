@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import 'OrderList.dart';
+
 class ProductListForOrder extends StatefulWidget {
   @override
   _ProductListForOrderState createState() => _ProductListForOrderState();
@@ -35,10 +37,11 @@ class _ProductListForOrderState extends State<ProductListForOrder> {
               children: <Widget>[
                 FlatButton(
                   //Bu butona tıklandığında Tıklanan veri myOrdere yazılmalı Nasıl yapcazz:/
-                  onPressed: () {
-                    // Navigator.push(context, MaterialPageRoute(builder: (context) => OrderPayPage()));
-                  },
                   color: Colors.orangeAccent,
+                  onPressed: () {
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => OrderList()));
+                  },
+                  // color: Colors.orangeAccent,
                   child:
                       Text('Sipariş Et', style: TextStyle(color: Colors.white)),
                 ),

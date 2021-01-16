@@ -1,8 +1,25 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class OrderList extends StatelessWidget {
+class OrderList extends StatefulWidget {
+  @override
+  _OrderListState createState() => _OrderListState();
+}
+
+class _OrderListState extends State<OrderList> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return StreamBuilder(
+        stream: Firestore.instance.collection('ProductCRUD').snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          return ListView(
+            children: snapshot.data.documents
+                .map((doc) => ListTile(
+                      title: Text(doc['name']),
+                      subtitle: Text(doc['price']),
+                    ))
+                .toList(),
+          );
+        });
   }
 }
