@@ -31,6 +31,7 @@ dependencies:
   uuid: any
   firebase_dynamic_links: ^0.5.1
   get_it: any
+  google_maps_flutter: any
 
 
 

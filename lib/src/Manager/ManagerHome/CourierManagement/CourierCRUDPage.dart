@@ -25,6 +25,7 @@ class _CourierCRUDState extends State<CourierCRUD> {
   final db = Firestore.instance;
   final _formKey = GlobalKey<FormState>();
   String name;
+  String email;
 
   Card buildItem(DocumentSnapshot doc) {
     return Card(
@@ -42,6 +43,11 @@ class _CourierCRUDState extends State<CourierCRUD> {
             SizedBox(height: 6),
             Text(
               'COURIER NAME:  ${doc['name']}',
+              style: TextStyle(color: Colors.brown, fontSize: 24),
+            ),
+            SizedBox(height: 6),
+            Text(
+              'COURIER EMAIL:  ${doc['email']}',
               style: TextStyle(color: Colors.brown, fontSize: 24),
             ),
             SizedBox(height: 6),
@@ -106,6 +112,23 @@ class _CourierCRUDState extends State<CourierCRUD> {
     );
   }
 
+  TextFormField buildTextFormField3() {
+    return TextFormField(
+      decoration: InputDecoration(
+        border: InputBorder.none,
+        hintText: 'Enter the email of courier',
+        fillColor: Colors.grey[300],
+        filled: true,
+      ),
+      validator: (value) {
+        if (value.isEmpty) {
+          return 'Please enter some text';
+        }
+      },
+      onSaved: (value) => email = value,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,6 +153,10 @@ class _CourierCRUDState extends State<CourierCRUD> {
                     height: 25,
                   ),
                   buildTextFormField2(),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  buildTextFormField3(),
                 ])),
           ]),
           Row(
@@ -167,7 +194,8 @@ class _CourierCRUDState extends State<CourierCRUD> {
         'name': '$name ',
         'id': '$id',
         'order': null,
-        'ordr_name': 'no order'
+        'ordr_name': 'no order',
+        'email': '$email'
       });
       setState(() => id = ref.documentID);
       print(ref.documentID);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_final_odevi/src/Courier/courierLogin.dart';
 import 'package:flutter_final_odevi/src/User/UserPage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -90,7 +91,7 @@ class _WelcomePageState extends State<WelcomePage> {
     return InkWell(
       onTap: () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => _CourierButton())); //TODO
+            MaterialPageRoute(builder: (context) => courierLogin())); //TODO
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
