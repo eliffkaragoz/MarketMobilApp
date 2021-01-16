@@ -10,7 +10,7 @@ class _OrderListState extends State<OrderList> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: Firestore.instance.collection('ProductCRUD').snapshots(),
+        stream: Firestore.instance.collection('Siparis').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           return ListView(
             children: snapshot.data.documents
