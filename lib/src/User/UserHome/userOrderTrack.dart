@@ -1,14 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_final_odevi/src/Manager/ManagerHome/courierTrackingMap.dart';
 
-import 'OrderPayPage.dart';
-
-class ProductListForOrder extends StatefulWidget {
+class userOrderTrackk extends StatefulWidget {
   @override
-  _ProductListForOrderState createState() => _ProductListForOrderState();
+  _userOrderTrackkState createState() => _userOrderTrackkState();
 }
 
-class _ProductListForOrderState extends State<ProductListForOrder> {
+class _userOrderTrackkState extends State<userOrderTrackk> {
   String id;
   final db = Firestore.instance;
   final _formKey = GlobalKey<FormState>();
@@ -27,8 +26,14 @@ class _ProductListForOrderState extends State<ProductListForOrder> {
               'NAME:  ${doc['name']}',
               style: TextStyle(color: Colors.brown, fontSize: 24),
             ),
+            SizedBox(height: 12),
             Text(
-              'PRICE :  ${doc['price']} ₺',
+              'PRICE:  ${doc['price']}',
+              style: TextStyle(color: Colors.brown, fontSize: 24),
+            ),
+            SizedBox(height: 12),
+            Text(
+              'COURIER:  ${doc['courier']}',
               style: TextStyle(color: Colors.brown, fontSize: 24),
             ),
             SizedBox(height: 12),
@@ -36,15 +41,9 @@ class _ProductListForOrderState extends State<ProductListForOrder> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 FlatButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => OrderPayPage(doc)));
-                  },
+                  onPressed: () => track(doc),
+                  child: Text('Track', style: TextStyle(color: Colors.white)),
                   color: Colors.orangeAccent,
-                  child:
-                      Text('Sipariş Et', style: TextStyle(color: Colors.white)),
                 ),
               ],
             )
@@ -57,15 +56,21 @@ class _ProductListForOrderState extends State<ProductListForOrder> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'ORDER LIST',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
       body: ListView(
         padding: EdgeInsets.all(8),
         children: <Widget>[
           StreamBuilder<QuerySnapshot>(
-            stream: db.collection('ProductCRUD').snapshots(),
+            stream: db.collection('Siparis').snapshots(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Column(
-                    children: snapshot.data.documents
+                    children: snapshot.data.docs
                         .map((doc) => buildItem(doc))
                         .toList());
               } else {
@@ -76,5 +81,12 @@ class _ProductListForOrderState extends State<ProductListForOrder> {
         ],
       ),
     );
+  }
+
+  void track(DocumentSnapshot doc) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => courierTrackingMap(doc['courier'])));
   }
 }

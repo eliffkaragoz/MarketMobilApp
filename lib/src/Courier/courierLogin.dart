@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -12,14 +11,8 @@ class courierLogin extends StatefulWidget {
 }
 
 class _courierLoginState extends State<courierLogin> {
-  String _email, _password;
+  String _email;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _register();
-  }
 
   Widget _title() {
     return RichText(
@@ -40,30 +33,6 @@ class _courierLoginState extends State<courierLogin> {
     );
   }
 
-  Widget _entryField(String title, {bool isPassword = false}) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            title,
-            style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          TextField(
-              obscureText: isPassword,
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  //fillColor: Color(0xfff3f3f4),
-                  filled: true))
-        ],
-      ),
-    );
-  }
-
   Widget _emailPasswordWidget() {
     return Form(
       key: _formKey,
@@ -78,25 +47,12 @@ class _courierLoginState extends State<courierLogin> {
                 // ignore: missing_return
               }
             },
-            onSaved: (input) => _email =
+            onChanged: (input) => _email =
                 input, // Input taki değeri email değişkenine aktarıyor..
             decoration: InputDecoration(labelText: 'Email'),
           ),
-          TextFormField(
-            // ignore: missing_return
-            validator: (input) {
-              if (input.length < 6) {
-                return 'Lütfen 6 karakterden büyük şifre girişi yapınız';
-                // ignore: missing_return
-              }
-            },
-            onSaved: (input) => _password = input,
-            decoration: InputDecoration(labelText: 'Şifre'),
-            obscureText: true,
-          ),
-
           RaisedButton(
-            onPressed: () => signIn(), // () => signIn()
+            onPressed: () => push(), //TODO
             color: Colors.orangeAccent,
             padding: EdgeInsets.symmetric(vertical: 4),
 
@@ -115,22 +71,9 @@ class _courierLoginState extends State<courierLogin> {
     );
   }
 
-  Future<void> signIn() async {
-    final formState = _formKey
-        .currentState; //FormKey formu temsil eden bir değişken   ///Formda bulunan tüm bilgileri içerisinde bulunduracak!!
-    if (formState.validate()) {
-      // todo login to firebase
-      formState.save();
-      try {
-        // Firebase ile iletişim noktası
-        UserCredential user = await FirebaseAuth.instance
-            .signInWithEmailAndPassword(email: _email, password: _password);
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => courierHome()));
-      } catch (e) {
-        print(e.toString());
-      }
-    }
+  void push() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => courierHome(_email)));
   }
 
   @override
@@ -175,15 +118,5 @@ class _courierLoginState extends State<courierLogin> {
             ],
           ),
         ));
-  }
-
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
-  void _register() async {
-    final FirebaseUser user = (await _auth.createUserWithEmailAndPassword(
-      email: "a@gmail.com",
-      password: "123456",
-    ))
-        .user;
   }
 }

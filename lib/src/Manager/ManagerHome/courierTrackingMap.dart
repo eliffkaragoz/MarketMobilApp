@@ -4,28 +4,25 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class orderCourierTrackingMap extends StatefulWidget {
+class courierTrackingMap extends StatefulWidget {
   courierTrackingMap(String email) {
     this.email = email;
   }
-
   String email;
   @override
-  _orderCourierTrackingMapState createState() =>
-      _orderCourierTrackingMapState(email);
+  _courierTrackingMapState createState() => _courierTrackingMapState(email);
 }
 
-class _orderCourierTrackingMapState extends State<orderCourierTrackingMap> {
+class _courierTrackingMapState extends State<courierTrackingMap> {
   StreamSubscription _locationSubscription;
   Marker marker;
   Circle circle;
   DocumentSnapshot courier;
   GoogleMapController _controller;
 
-  _orderCourierTrackingMapState(String email) {
+  _courierTrackingMapState(String email) {
     this.email = email;
   }
-
   String email;
 
   static final CameraPosition initialLocation = CameraPosition(

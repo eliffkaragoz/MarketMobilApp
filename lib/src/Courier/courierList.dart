@@ -50,6 +50,9 @@ class _courierListState extends State<courierList> {
               .update(<String, dynamic>{'order': ordr, 'ordr_name': pname});
         }
       });
+      ordr.get().then((DocumentSnapshot ds) {
+        ds.reference.update({'courier': record.email});
+      });
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => orderList()));
     }

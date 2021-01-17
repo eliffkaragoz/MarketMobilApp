@@ -1,26 +1,51 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_final_odevi/BackGround/BackGroundMain.dart';
 //import '../Courier/Courier.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../Manager/ManagerHome/CourierManagement/CourierCRUDPage.dart';
-
-final FirebaseAuth _auth = FirebaseAuth.instance;
+import 'courierOrderRoute.dart';
 
 class courierHome extends StatefulWidget {
-  courierHome({Key key, this.title}) : super(key: key);
-  final String title;
+  courierHome(String email) {
+    this.email = email;
+  }
+  String email;
   @override
-  _courierHomeState createState() => _courierHomeState();
+  _courierHomeState createState() => _courierHomeState(email);
 }
 
 class _courierHomeState extends State<courierHome> {
+  _courierHomeState(String email) {
+    this.email = email;
+  }
+  String email;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  getlocation() {
+    DocumentReference document =
+        FirebaseFirestore.instance.collection('CourierCRUD').doc('$email');
+    document.get().then((DocumentSnapshot ds) {
+      ds['order'].get().then((DocumentSnapshot dp) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => MapSample(dp['location'], document)));
+      });
+    });
+  }
+
   Widget _title() {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-        text: 'COURIER PAGE ',
+        text: 'COURIER PAGE',
         style: GoogleFonts.portLligatSans(
           textStyle: Theme.of(context).textTheme.display1,
           fontSize: 40,
@@ -34,8 +59,7 @@ class _courierHomeState extends State<courierHome> {
   Widget routeButton() {
     return InkWell(
       onTap: () {
-        /*Navigator.push(context,
-            MaterialPageRoute(builder: (context) => MapSample())); //TODO*/
+        getlocation(); //TODO
       },
       child: Container(
         width: MediaQuery.of(context).size.width,

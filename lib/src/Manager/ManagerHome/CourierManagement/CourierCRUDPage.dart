@@ -190,15 +190,14 @@ class _CourierCRUDState extends State<CourierCRUD> {
   void createData() async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      DocumentReference ref = await db.collection('CourierCRUD').add({
-        'name': '$name ',
+      await db.collection('CourierCRUD').doc('$email').set({
+        'name': '$name',
         'id': '$id',
         'order': null,
         'ordr_name': 'no order',
         'email': '$email'
       });
-      setState(() => id = ref.documentID);
-      print(ref.documentID);
+      //setState(() => id = ref.id);
     }
   }
 

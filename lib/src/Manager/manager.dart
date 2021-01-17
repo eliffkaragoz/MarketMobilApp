@@ -16,11 +16,11 @@ class _ManagerPageState extends State<ManagerPage> {
   String _email, _password;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  void initState() {
+  /*void initState() {
     // TODO: implement initState
     super.initState();
-    _register();
-  }
+    //_register();
+  }*/
 
   Widget _title() {
     return RichText(
@@ -38,30 +38,6 @@ class _ManagerPageState extends State<ManagerPage> {
               style: TextStyle(color: Color(0xffe46b10), fontSize: 40),
             ),
           ]),
-    );
-  }
-
-  Widget _entryField(String title, {bool isPassword = false}) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            title,
-            style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          TextField(
-              obscureText: isPassword,
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  //fillColor: Color(0xfff3f3f4),
-                  filled: true))
-        ],
-      ),
     );
   }
 
@@ -124,8 +100,9 @@ class _ManagerPageState extends State<ManagerPage> {
       formState.save();
       try {
         // Firebase ile iletişim noktası
-        UserCredential user = await FirebaseAuth.instance
-            .signInWithEmailAndPassword(email: _email, password: _password);
+        /* UserCredential user = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(email: _email, password: _password);*/
+
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => ManagerHome()));
 
@@ -182,11 +159,11 @@ class _ManagerPageState extends State<ManagerPage> {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  void _register() async {
+  /* void _register() async {
     final FirebaseUser user = (await _auth.createUserWithEmailAndPassword(
       email: "a@gmail.com",
       password: "123456",
     ))
         .user;
-  }
+  }*/
 }

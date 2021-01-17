@@ -13,7 +13,7 @@ class _OrderListState extends State<OrderList> {
         stream: Firestore.instance.collection('Siparis').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           return ListView(
-            children: snapshot.data.documents
+            children: snapshot.data.docs
                 .map((doc) => ListTile(
                       title: Text(doc['name']),
                       subtitle: Text(doc['price']),
